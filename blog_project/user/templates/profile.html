@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'app.css' %}" />
+  <link rel="stylesheet" href="{% static 'color.css' %}" />
+  <link rel="stylesheet" href="{% static 'blog_box.css' %}" />
+  
+ <title>Profile Page</title>
+</head>
+<body>
+  <div class="header__wrapper">
+    <div class="cols__container">
+      <div class="left__col">
+        <div class="img__container">
+          {% if user.profile.photo %}
+            <img src="{{ user.profile.photo.url }}" alt="Profile" />
+          {% else %}
+            <img src="{% static 'avatar.jpg' %}" alt="Profile" />
+          {% endif %}
+        </div>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <p>{{ user.email }}</p>
+
+        <ul class="about">
+          <li><span>{{ writtenPosts|length }}</span>Posts</li>
+          <li><span>{{ likedPosts|length }}</span>Likes</li>
+        </ul>
+        <div class="content">
+          <p>
+            {{ user.profile.about_me }}
+          </p>     
+        </div>
+        {% if user.is_authenticated and edit %}
+        <a href="{% url 'profile-edit' %}"><button class="edit-profile-button" >Edit Profile</button></a>
+        {% endif %}
+      </div>
+      <div class="right__col">
+        <nav>
+          <ul>
+            <li><span id="written-text" onclick="showWritten()">Written Blogs</span></li>
+            <li><span id="liked-text" onclick="showliked()">Liked Blogs</span></li>
+          </ul>
+        </nav>
+        <div id="liked-posts" class="post-container">
+          {% for x in likedPosts %} 
+          {% include 'blog_box.html' with post=x %} 
+          {% endfor %}
+        </div> 
+        <div id="written-posts" class="post-container">
+          {% for x in writtenPosts %} 
+          {% include 'blog_box.html' with post=x %} 
+          {% endfor %}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'hide.js' %}"></script>
+</body>
+</html>
+</body>
+</html>

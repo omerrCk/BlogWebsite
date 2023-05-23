@@ -1,0 +1,16 @@
+<nav id="navbar">
+  <a href="/"><h1>Blogger</h1></a>
+
+  <div id="link-container">
+    {% if user.is_authenticated %}
+      <a href="{% url 'profile' %}"><span style="font-size: 1.4rem;">Hi {{ user.first_name }}!</span></a>
+      <a href="{% url 'blog_create' %}">Write Blog</a>
+      <a href="{% url 'blog_list' %}">Blogs</a>
+      <a id="signup" href="/accounts/logout/">Log Out</a>
+    {% else %}
+      <a href="{% url 'blog_list' %}">Blogs</a>
+      <a href="/accounts/login/">Log In</a>
+      <a id="signup" href="/accounts/signup/">Sign Up</a>
+    {% endif %}
+  </div>
+</nav>

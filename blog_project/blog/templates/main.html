@@ -1,0 +1,49 @@
+{% extends 'master.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'main.css' %}" />
+<link rel="stylesheet" href="{% static 'blog_box.css' %}" />
+
+<title>Blogger - The best blogs in the galaxy</title>
+{% endblock %} {% block content %}
+<section class="border-bt" id="hero">
+  <div>
+    <h2>Be hungry for the blogs!</h2>
+    <h3>
+      Discover stories, thinking, and expertise from writers on any topic.
+    </h3>
+  </div>
+  <div style="position: relative">
+    <img src="{% static 'home_img.png' %}" alt="" />
+  </div>
+</section>
+<h2 style="text-align: center">Trending Blogs</h2>
+<section class="border-bt" id="trendings">
+    {% for x in trendingPosts %}
+      <a href="blog/{{ x.slug }}">
+        <div>
+          <span>*</span>
+          <h2>{{x.title}}</h2>
+        </div>
+      </a>
+    {% endfor %}
+</section>
+<h2 style="text-align: center">Last Posted Blogs</h2>
+<section id="last-posted">
+  {% for x in page_obj %} 
+    {% include 'blog_box.html' with post=x %} 
+  {% endfor %}
+</section>
+<center>
+  <span>
+    {% if page_obj.has_previous %}
+      <a class="paginate" href="?page={{ page_obj.previous_page_number }}#last-posted">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+      <a class="paginate" href="?page={{ page_obj.next_page_number }}#last-posted">Next</a>
+    {% endif %}
+  </span>
+</center>
+<footer><span>Blog Website Project for Web Programming</span></footer>
+{% endblock %}

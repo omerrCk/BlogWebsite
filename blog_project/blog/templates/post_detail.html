@@ -1,0 +1,70 @@
+{% extends 'master.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>{{ object.title }}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+          }
+          
+          body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+          }
+
+          #title{
+            text-align: center;
+            font-size: 4rem;
+          }
+
+          #container{
+            display: flex;
+            flex-direction: column;
+            justify-items: flex-start;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+          }
+
+          #container p{
+            text-align: center;
+            line-height: 1.4rem;
+          }
+    </style>
+{% endblock %} {% block content %}
+    <div id="container">
+        <h1 id="title">{{ object.title }}</h1>
+        <div>
+          <a href="{% url 'profile-username' username=object.author.username %}">
+          {% if object.author.profile.photo %}
+            <img style="border-radius: 50%;" width="32" height="32" src="{{object.author.profile.photo.url}}" alt="User Photo" />
+          {% else %}
+            <img width="32" height="32" style="border-radius: 50%;" src="{% static 'avatar.jpg' %}" alt="User Photo" />
+          {% endif %} 
+          </a>
+          <span>{{ object.author.first_name}} {{ object.author.last_name }}</span>
+        </div>
+        {% if object.photo %}
+          <img src="{{object.photo.url}}" width="700" height="278"  alt="Blog Photo" />
+        {% else %}
+          <img src="{% static 'placeholder.png' %}" alt="Blog Photo" />
+        {% endif %} 
+        <p>{{ object.body }}</p>
+        <strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+        {% if user.is_authenticated %}
+          <form action="{% url 'blogpost_like' object.slug %}" method="POST">
+            {% csrf_token %}
+
+            {% if post_is_liked %}
+            <button type="submit" name="blogpost_id" value="{{object.slug}}" class="btn btn-info">Unlike</button>
+            {% else %}
+            <button type="submit" name="blogpost_id" value="{{object.slug}}" class="btn btn-info">Like</button>
+            {% endif %}
+          </form>
+        {% else %}
+          <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+        {% endif %}
+    </div>
+{% endblock %} 

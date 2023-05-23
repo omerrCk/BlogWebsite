@@ -1,0 +1,15 @@
+{% load static %}
+<div class="card mb-5">
+    {% if baslik.photo %}
+      <img src="{{baslik.photo.url}}" class="h-16 card-img-top"  alt="Blog Photo" />
+    {% else %}
+      <img src="{% static 'placeholder.png' %}" class="card-img-top img-fluid" alt="Blog Photo" />
+    {% endif %} 
+    <div class="card-body">
+    <h5 class="card-title">{{ baslik.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Author: {{ baslik.author.first_name }}</h6>
+    <p class="card-text">{{ baslik.body|slice:":126" }}...</p>
+    
+    <h6 class="card-subtitle mb-2 text-muted">{{ baslik.publish }}</h6>
+    </div>
+</div>

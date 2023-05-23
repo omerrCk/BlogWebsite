@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'login_signup.css' %}" />
+    <link rel="stylesheet" href="{% static 'color.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="forms">
+        <div class="form signup">
+          <span class="title">Sign Up</span>
+          <form method="post">
+            {% csrf_token %}
+            <div class="input-field">
+              <input name="username" type="text" placeholder="Username" />
+              <i class="uil uil-user"></i>
+            </div>
+            <div class="input-field">
+              <input
+                name="password1"
+                type="password"
+                class="password"
+                placeholder="Password"
+              />
+              <i class="uil uil-eye icon"></i>
+            </div>
+            <div class="input-field">
+              <input
+              name="password2"
+                type="password"
+                class="password"
+                placeholder="Password Confirm"
+              />
+              <i class="uil uil-eye icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+
+            <div class="checkbox-text">
+              <input type="checkbox" id="termCon" />
+              <label for="termCon" class="text"
+                >I accept rules.</label
+              >
+            </div>
+
+            <div class="input-field button">
+              <button type="submit">Sign Up</button>
+            </div>
+            <div class="login-signup">
+              <span class="text"
+                >I have an account
+                <a href="/accounts/login/" class="text login-link">Log In</a>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var container = document.querySelector(".container");
+      container.classList.add("active");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% load static %}
+<div class="blog-box">
+  <div class="blog-box-h">
+    <a href="{% url 'profile-username' username=post.author.username %}">
+    {% if post.author.profile.photo %}
+      <img src="{{post.author.profile.photo.url }}" alt="Blog Photo" />
+    {% else %}
+      <img src="{% static 'avatar.jpg' %}" alt="Blog Photo" />
+    {% endif %} 
+    </a>
+    <span>{{ post.author.first_name}} {{ post.author.last_name }}</span>
+  </div>
+  <a href="{{ post.get_absolute_url }}">
+  <div class="blog-box-b">
+    <div>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body|slice:":128" }}...</p>
+    </div>
+    {% if post.photo %}
+      <img src="{{post.photo.url}}" alt="Blog Photo" />
+    {% else %}
+      <img src="{% static 'placeholder.png' %}" alt="Blog Photo" />
+    {% endif %} 
+  </div>
+</a>
+</div>

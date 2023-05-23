@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.border-bt {
+  border-bottom: 1px solid black;
+}
+
+#hero {
+  position: relative;
+  min-height: 60vh;
+  background-color: var(--emerald);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.2rem;
+}
+
+#hero div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#trendings > a{
+  text-decoration: none;
+  color: black;
+}
+
+
+#hero h2 {
+  font-size: 4rem;
+  font-weight: 200;
+  margin: 0;
+}
+
+#hero img {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  max-height: 18rem;
+  animation: bounce 2s linear 0s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translate(0px, -20px) rotate(-15deg);
+  }
+  50% {
+    transform: translate(0px, 20px) rotate(-10deg);
+  }
+}
+
+#trendings {
+  min-height: 20vh;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  display: grid;
+  padding: 2rem;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#trendings div {
+  display: flex;
+  align-items: center;
+  border: 2px dotted black;
+  border-radius: 8px;
+  gap: 0.4rem;
+  padding: 0.4rem;
+}
+
+#trendings div:hover {
+  border: 2px solid var(--sunglow);
+}
+
+#trendings div span {
+  padding: 0.4rem;
+  font-size: 2rem;
+  border-right: 2px solid black;
+  color: var(--pink);
+}
+
+#last-posted {
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 2rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.paginate {
+  color: whitesmoke !important;
+  background-color: var(--emerald);
+  padding: 0.6rem;
+  margin-left: 0.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    font-size: 12px;
+  }
+  
+  #hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #hero img {
+    max-height: 12rem;
+  }
+
+  #trendings {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  #last-posted {
+    gap: 0.3rem;
+    padding: 0.4rem;
+  }
+}
